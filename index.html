@@ -1,0 +1,1071 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>كنز المعرفة</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Lalezar&family=Readex+Pro:wght@300..700&display=swap">
+<style>
+/* Layout concept: a night-sea treasure route. One column of islands, each island a different kind of question; every round is a short stop with its own collectible. */
+:root{
+  --bg:#E3F1F0; --bg2:#CFE6E8; --card:#FFFFFF; --card2:#F2F9F9; --line:#B3D2D8;
+  --ink:#0F2B38; --ink2:#46636F;
+  --accent:#0B7A87; --on-accent:#FFFFFF;
+  --good:#12815A; --bad:#C23A2B; --gold:#E3A000;
+  --c1:#D18F00; --c2:#16899A; --c3:#7656D3; --c4:#1B9A62; --c5:#D5463A;
+  --code-bg:#0F2B38; --code-fg:#E2F0F3;
+  --shadow:0 1px 0 rgba(15,43,56,.06),0 10px 26px -14px rgba(15,43,56,.32);
+  --wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='18' viewBox='0 0 56 18'%3E%3Cpath d='M0 9Q7 2 14 9T28 9T42 9T56 9' fill='none' stroke='%23FFFFFF' stroke-opacity='.6' stroke-width='1.6'/%3E%3C/svg%3E");
+  --font-display:'Lalezar','Readex Pro',Tahoma,'Segoe UI',sans-serif;
+  --font-body:'Readex Pro',Tahoma,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,Consolas,'Courier New',monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A222E; --bg2:#0E2D3C; --card:#12384A; --card2:#0F3141; --line:#25566B;
+    --ink:#E8F4F6; --ink2:#9DC1CD;
+    --accent:#3CC4D6; --on-accent:#06242C;
+    --good:#3FD6A2; --bad:#FF8168; --gold:#FFC83D;
+    --c1:#FFC83D; --c2:#3FC6D6; --c3:#A998F7; --c4:#47D89C; --c5:#FF8068;
+    --code-bg:#07161E; --code-fg:#D8EAEF;
+    --shadow:0 12px 30px -16px rgba(0,0,0,.7);
+    --wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='18' viewBox='0 0 56 18'%3E%3Cpath d='M0 9Q7 2 14 9T28 9T42 9T56 9' fill='none' stroke='%23FFFFFF' stroke-opacity='.07' stroke-width='1.6'/%3E%3C/svg%3E");
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A222E; --bg2:#0E2D3C; --card:#12384A; --card2:#0F3141; --line:#25566B;
+  --ink:#E8F4F6; --ink2:#9DC1CD;
+  --accent:#3CC4D6; --on-accent:#06242C;
+  --good:#3FD6A2; --bad:#FF8168; --gold:#FFC83D;
+  --c1:#FFC83D; --c2:#3FC6D6; --c3:#A998F7; --c4:#47D89C; --c5:#FF8068;
+  --code-bg:#07161E; --code-fg:#D8EAEF;
+  --shadow:0 12px 30px -16px rgba(0,0,0,.7);
+  --wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='18' viewBox='0 0 56 18'%3E%3Cpath d='M0 9Q7 2 14 9T28 9T42 9T56 9' fill='none' stroke='%23FFFFFF' stroke-opacity='.07' stroke-width='1.6'/%3E%3C/svg%3E");
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; direction:rtl;
+  font-family:var(--font-body); font-size:16px; line-height:1.6; font-weight:400;
+  color:var(--ink);
+  background-color:var(--bg);
+  background-image:var(--wave),linear-gradient(180deg,var(--bg2),var(--bg) 560px);
+  background-size:56px 18px,auto;
+  padding-block:20px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:disabled{cursor:not-allowed}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+svg{display:block;flex:none}
+.wrap{max-width:720px;margin:0 auto;min-width:0}
+.ico{width:1.15em;height:1.15em;display:inline-block;vertical-align:-.2em}
+
+/* hero */
+.hero{padding:8px 0 28px}
+.kicker{margin:0;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);direction:ltr;text-align:right}
+.hero h1{margin:6px 0 8px;font-family:var(--font-display);font-weight:400;font-size:clamp(2.7rem,11vw,4.2rem);line-height:1.05;text-wrap:balance}
+.hero h1 span{background:linear-gradient(transparent 60%,color-mix(in srgb,var(--gold) 55%,transparent) 60% 90%,transparent 90%);padding-inline:.12em}
+.hero p.sub{margin:0 0 20px;color:var(--ink2);max-width:46ch;text-wrap:balance}
+.journey{display:grid;gap:8px;padding:14px 16px;background:var(--card);border:1.5px solid var(--line);border-radius:16px}
+.journey-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.9rem}
+.journey-row b{font-variant-numeric:tabular-nums}
+.pill{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.pill svg{width:18px;height:18px;color:var(--gold)}
+.bar{height:9px;border-radius:99px;background:var(--bg2);overflow:hidden;min-width:60px}
+.bar>i{display:block;height:100%;background:var(--c,var(--accent));border-radius:inherit;transition:width .4s}
+.bar.boss>i{background:var(--bad)}
+
+/* route */
+.route{list-style:none;margin:0;padding:0}
+.route li:not(:last-child)::after{content:"";display:block;height:30px;margin-inline-start:47px;border-inline-start:3px dotted var(--line)}
+.isle{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;width:100%;text-align:start;padding:14px 16px;background:var(--card);border:2px solid var(--line);border-radius:20px;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.isle:hover:not(:disabled){transform:translateY(-2px);border-color:var(--c)}
+.isle:disabled{background:var(--card2);border-style:dashed;box-shadow:none;opacity:.8}
+.badge{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 18%,var(--card));color:var(--c);border:2px solid color-mix(in srgb,var(--c) 55%,transparent)}
+.badge svg{width:34px;height:34px}
+.isle-tag{display:block;font-size:.78rem;color:var(--ink2)}
+.isle-name{display:block;font-family:var(--font-display);font-size:1.5rem;line-height:1.2}
+.isle-mission{display:block;margin-top:2px;font-size:.9rem;color:var(--ink2)}
+.isle-prog{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:.78rem;color:var(--ink2);flex-wrap:wrap}
+.isle-prog .bar{flex:1 1 90px;max-width:200px}
+.isle-prog .pill{font-size:.78rem;color:var(--ink)}
+.isle-prog .pill svg{width:15px;height:15px}
+.treasure{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;padding:16px;border:2px dashed var(--line);border-radius:20px;background:var(--card2);color:var(--ink2)}
+.treasure.open{border-style:solid;border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card));color:var(--ink)}
+.treasure .badge{--c:var(--gold)}
+.treasure strong{display:block;font-family:var(--font-display);font-weight:400;font-size:1.35rem;color:var(--ink)}
+.foot{display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:center;margin-top:28px}
+.link{background:none;border:0;padding:8px 4px;min-height:44px;color:var(--ink2);text-decoration:underline;text-underline-offset:3px;font-size:.88rem;display:inline-flex;align-items:center;gap:6px}
+.link:hover{color:var(--ink)}
+
+/* top rows */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.top .count{font-family:var(--font-mono);font-size:.85rem;color:var(--ink2);font-variant-numeric:tabular-nums;direction:ltr}
+.chev{width:18px;height:18px}
+.page-title{margin:0 0 4px;font-family:var(--font-display);font-weight:400;font-size:clamp(1.9rem,7vw,2.6rem);line-height:1.15;text-wrap:balance}
+.lead{margin:0 0 18px;color:var(--ink2)}
+.boss{margin:0 0 20px;padding:12px 16px;border:1.5px solid var(--line);border-radius:16px;background:var(--card);display:grid;gap:6px;font-size:.9rem}
+.rounds{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.round{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;padding:14px 8px;border:2px solid var(--line);border-radius:16px;background:var(--card);box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.round:hover:not(:disabled){transform:translateY(-2px);border-color:var(--c)}
+.round.done{border-color:var(--c)}
+.round:disabled{background:var(--card2);border-style:dashed;box-shadow:none;opacity:.75}
+.round-n{font-family:var(--font-display);font-size:2rem;line-height:1}
+.round-meta{font-size:.8rem;color:var(--ink2)}
+.stars{display:flex;gap:2px}
+.stars svg{width:20px;height:20px;color:var(--line)}
+.stars .on{color:var(--gold)}
+.unlock-note{margin:18px 0 0;font-size:.88rem;color:var(--ink2)}
+
+/* play */
+.slots{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.slot{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--card2);border:1.5px solid var(--line);color:var(--line)}
+.slot svg{width:20px;height:20px}
+.slot.cur{border-color:var(--accent);color:var(--accent)}
+.slot.good{color:var(--c);border-color:var(--c);background:color-mix(in srgb,var(--c) 16%,var(--card));animation:pop .45s}
+.slot.half{color:var(--c);border-color:var(--c);background:color-mix(in srgb,var(--c) 8%,var(--card));opacity:.75}
+.slot.bad{color:var(--bad);border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,var(--card))}
+.qcard{background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.78rem;border:1.5px solid var(--line);color:var(--ink2)}
+.chip.type{color:var(--ink);border-color:color-mix(in srgb,var(--c) 60%,transparent);background:color-mix(in srgb,var(--c) 14%,var(--card))}
+.chip.mono{font-family:var(--font-mono);direction:ltr}
+.q{margin:14px 0 16px;font-size:1.2rem;font-weight:500;line-height:1.55;direction:ltr;text-align:left;white-space:pre-line;overflow-wrap:anywhere}
+.q:focus{outline:none}
+.codebox{margin:0 0 16px;direction:ltr}
+.codebox summary{cursor:pointer;font-size:.8rem;font-family:var(--font-mono);color:var(--ink2);padding:4px 0;margin-bottom:6px}
+.code{margin:0;padding:12px 14px;background:var(--code-bg);color:var(--code-fg);border-radius:12px;font:500 .85rem/1.55 var(--font-mono);overflow-x:auto;direction:ltr;text-align:left;white-space:pre;tab-size:4}
+.tf{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tf-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:96px;padding:10px;border:2px solid var(--line);border-radius:16px;background:var(--card2);font-family:var(--font-display);font-size:1.7rem;line-height:1.2;transition:transform .12s,border-color .12s}
+.tf-btn svg{width:26px;height:26px}
+.tf-btn.yes svg{color:var(--good)}
+.tf-btn.no svg{color:var(--bad)}
+.tf-btn small{font-family:var(--font-mono);font-size:.75rem;color:var(--ink2)}
+.tf-btn.yes:hover:not(:disabled){border-color:var(--good);transform:translateY(-2px)}
+.tf-btn.no:hover:not(:disabled){border-color:var(--bad);transform:translateY(-2px)}
+.opts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:var(--card2);line-height:1.5;transition:border-color .12s}
+.opt b{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--bg2);font-family:var(--font-mono);font-size:.85rem}
+.opt span{min-width:0;overflow-wrap:anywhere;padding-top:2px}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.is-right{border-color:var(--good)!important;background:color-mix(in srgb,var(--good) 14%,var(--card))!important}
+.is-wrong{border-color:var(--bad)!important;background:color-mix(in srgb,var(--bad) 14%,var(--card))!important}
+.is-dim{opacity:.55}
+.lbl{display:block;margin:0 0 8px;font-weight:600;font-size:.92rem}
+.ta{width:100%;min-height:110px;resize:vertical;padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:var(--card2);color:var(--ink);font:inherit;line-height:1.55}
+.ta.code{font-family:var(--font-mono);font-size:.9rem;direction:ltr;text-align:left;tab-size:4}
+.ta:focus-visible{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 30%,transparent)}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:12px}
+.hint{font-size:.82rem;color:var(--ink2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 20px;border:2px solid var(--line);border-radius:12px;background:var(--card);font-weight:600;transition:transform .12s,border-color .12s}
+.btn:hover:not(:disabled){transform:translateY(-1px);border-color:var(--accent)}
+.btn:disabled{opacity:.5}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.primary:hover:not(:disabled){border-color:var(--ink)}
+.panels{display:grid;gap:12px}
+@media (min-width:640px){.panels{grid-template-columns:1fr 1fr}}
+.panel{min-width:0;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;background:var(--card2)}
+.panel.model{border-color:var(--accent)}
+.panel h3{margin:0 0 8px;font-size:.8rem;font-weight:600;color:var(--ink2)}
+.mtxt{white-space:pre-wrap;overflow-wrap:anywhere;direction:ltr;text-align:left}
+.mtxt[dir="auto"]{direction:rtl;text-align:start;unicode-bidi:plaintext}
+.panel .code{margin-top:8px}
+.panel .code:first-of-type{margin-top:0}
+.note{margin:10px 0 0;font-size:.85rem;color:var(--ink2);direction:rtl;text-align:right}
+.rate-wrap{margin-top:16px}
+.rate{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.rate .btn.r-full{border-color:var(--good)}
+.rate .btn.r-half{border-color:var(--gold)}
+.rate .btn.r-none{border-color:var(--bad)}
+.fb{margin-top:16px;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);font-weight:500}
+.fb.good{color:var(--good);border-color:var(--good);background:color-mix(in srgb,var(--good) 10%,var(--card))}
+.fb.bad{color:var(--bad);border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,var(--card))}
+.fb.mid{color:var(--ink);border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--card))}
+.fb p{margin:6px 0 0;color:var(--ink);font-weight:400}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+
+/* result */
+.result{text-align:center}
+.result .kicker{text-align:center}
+.r-title{margin:8px 0 14px;font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,8vw,3rem);line-height:1.15;text-wrap:balance}
+.r-title:focus{outline:none}
+.big-stars{display:flex;gap:10px;justify-content:center;margin-bottom:12px}
+.big-stars svg{width:56px;height:56px;color:var(--line)}
+.big-stars .on{color:var(--gold);animation:pop .55s both}
+.big-stars svg:nth-child(2){animation-delay:.15s!important}
+.big-stars svg:nth-child(3){animation-delay:.3s!important}
+.r-sum{margin:0 0 4px;font-weight:600}
+.r-sub{margin:0 0 18px;color:var(--ink2)}
+.unlock{display:flex;align-items:center;gap:12px;margin:18px auto;max-width:480px;padding:12px 16px;border:2px solid var(--gold);border-radius:16px;background:color-mix(in srgb,var(--gold) 14%,var(--card));text-align:start}
+.unlock svg{width:30px;height:30px;color:var(--gold)}
+.result .actions{justify-content:center}
+.review{margin-top:26px;text-align:start}
+.review summary{cursor:pointer;font-weight:600;padding:8px 0}
+.rv{margin-top:10px;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;background:var(--card)}
+.rv .q{font-size:1rem;margin:0 0 8px}
+.rv .ans{margin:0;font-size:.92rem;color:var(--ink2)}
+.rv .ans b{color:var(--good)}
+
+@keyframes pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.18);opacity:1}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:420px){
+  .isle{gap:12px;padding:12px}
+  .badge{width:56px;height:56px}
+  .route li:not(:last-child)::after{margin-inline-start:39px}
+  .qcard{padding:16px}
+}
+</style>
+
+<div id="app" lang="ar" dir="rtl"></div>
+<noscript><p style="padding:16px">تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-coin" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="currentColor"/><circle cx="16" cy="16" r="9" fill="none" stroke="var(--card)" stroke-opacity=".6" stroke-width="2"/><path d="M16 11l2.4 5-2.4 5-2.4-5z" fill="var(--card)" fill-opacity=".75"/></symbol>
+    <symbol id="i-door" viewBox="0 0 32 32"><path d="M7 29V13a9 9 0 0 1 18 0v16z" fill="currentColor"/><circle cx="21" cy="19" r="1.7" fill="var(--card)"/></symbol>
+    <symbol id="i-door-open" viewBox="0 0 32 32"><path d="M9 28V13.5a7 7 0 0 1 14 0V28z" fill="currentColor" fill-opacity=".28"/><path d="M7 29V13a9 9 0 0 1 18 0v16z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M7 29V13l8-3v19z" fill="currentColor"/></symbol>
+    <symbol id="i-puzzle" viewBox="0 0 32 32"><path d="M6 10h6a3 3 0 1 1 6 0h6v6a3 3 0 1 1 0 6v6H6z" fill="currentColor"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 32 32"><rect x="9" y="9" width="14" height="14" rx="2.5" fill="currentColor"/><path d="M13 5v4M19 5v4M13 23v4M19 23v4M5 13h4M5 19h4M23 13h4M23 19h4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 32 32"><path d="M19 3L7 18h8l-2 11 12-16h-8z" fill="currentColor"/></symbol>
+    <symbol id="i-castle" viewBox="0 0 32 32"><path d="M3 29V11h5V7h4v4h2V5h4v6h2V7h4v4h5v18z" fill="currentColor"/><path d="M13 29v-7a3 3 0 0 1 6 0v7z" fill="var(--card)"/></symbol>
+    <symbol id="i-chest" viewBox="0 0 32 32"><path d="M4 14a12 8 0 0 1 24 0v13H4z" fill="currentColor"/><rect x="4" y="14" width="24" height="3" fill="var(--card)" fill-opacity=".45"/><rect x="13" y="16" width="6" height="8" rx="1.5" fill="var(--card)"/></symbol>
+    <symbol id="i-star" viewBox="0 0 32 32"><path d="M16 3l4.1 8.6 9.4 1.2-6.9 6.5 1.8 9.3L16 23.8l-8.4 4.8 1.8-9.3-6.9-6.5 9.4-1.2z" fill="currentColor"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 32 32"><rect x="7" y="14" width="18" height="14" rx="3" fill="currentColor"/><path d="M11 14v-3a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 32 32"><path d="M7 17l6 6 12-13" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 32 32"><path d="M9 9l14 14M23 9L9 23" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 32 32"><path d="M12 6l10 10-10 10" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<script>
+(function(){
+'use strict';
+
+/* ------------------------------------------------------------------ *
+ *  Question bank — WE Schools · Unit 7 · Object-Oriented Foundations *
+ * ------------------------------------------------------------------ */
+var KEY='kq-unit7-v1';
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+var CODE_DS=`class StudentDataset:
+    def __init__(self):
+        self.__records = []
+
+    def add_student(self, name, score, subject):
+        if not (0 <= score <= 100):
+            print(f"Invalid score for {name}. Must be between 0 and 100.")
+            return
+        self.__records.append({"name": name, "score": score, "subject": subject})
+
+    def load_batch(self, data_list):
+        for item in data_list:
+            self.add_student(item["name"], item["score"], item["subject"])
+        print(f"[StudentDataset] Loaded {len(self.__records)} valid records.")
+
+    def get_record_count(self):
+        return len(self.__records)
+
+dataset = StudentDataset()
+raw_data = [
+    {"name": "Sara Al-Amin", "score": 92,  "subject": "Python"},
+    {"name": "Ahmed Nour",   "score": 78,  "subject": "Python"},
+    {"name": "Layla Hassan", "score": 85,  "subject": "AI Theory"},
+    {"name": "Omar Farouk",  "score": 105, "subject": "Python"},
+    {"name": "Nour Khalil",  "score": 67,  "subject": "AI Theory"},
+    {"name": "Dina Mostafa", "score": 91,  "subject": "Python"},
+]
+dataset.load_batch(raw_data)`;
+
+var CODE_SPM=`class SimplePredictionModel:
+    def __init__(self, model_name, pass_threshold=60):
+        self.model_name = model_name
+        self.__pass_threshold = pass_threshold   # private attribute
+        self.__is_trained = False                # private attribute
+
+    def train(self, score_list):
+        self.__is_trained = True
+        print(f"[{self.model_name}] Training complete.")
+        print(f"Trained on {len(score_list)} samples.")
+
+    # predict() is missing`;
+
+var CODE_PR=`class PredictionResult:
+    def __init__(self, label, confidence):
+        self.label = label
+        self.confidence = confidence
+
+    def show_result(self):
+        print(f"{self.label} - {self.confidence}%")
+
+result = PredictionResult("Course Question:", 86)
+result.show_result()
+result.confidence = -20
+result.show_result()`;
+
+var CODE_EVAL=`# Model 1
+def evaluate(self, test_scores, test_labels):      # SimplePredictionModel
+    correct = 0
+    for score, actual in zip(test_scores, test_labels):
+        prediction = "PASS" if score >= self.__pass_threshold else "FAIL"
+        if prediction == actual:
+            correct += 1
+    accuracy = (correct / len(test_scores)) * 100
+    print(f"Accuracy: {correct}/{len(test_scores)} = {accuracy:.1f}%")
+
+# Model 2
+def evaluate(self, test_cases):                    # RecommendationModel
+    hits = 0
+    for category in test_cases:
+        if category in self.__catalogue:
+            hits += 1
+    coverage = (hits / len(test_cases)) * 100
+    print(f"Coverage: {coverage:.0f}%")
+
+# Test data
+# Model 1: threshold = 60
+test_scores  = [70, 50, 85, 40, 95]
+test_actuals = ["PASS", "FAIL", "PASS", "FAIL", "PASS"]
+# Model 2: catalogue has Action, Drama, Comedy, Sci-Fi, Animation
+rec_model.evaluate(["Action", "Drama", "Horror", "Sci-Fi", "Documentary"])`;
+
+function tf(k,rows){return rows.map(function(r){return {k:k,q:r[0],a:!!r[1],why:r[2]||''};});}
+function mc(k,rows){return rows.map(function(r){return {k:k,q:r[0],o:r[1],a:r[2],code:r[3]||''};});}
+function wr(k,rows){return rows.map(function(r){return Array.isArray(r)?{k:k,q:r[0],a:r[1]}:Object.assign({k:k},r);});}
+
+/* ---- 1) True / False ---- */
+var TF=[].concat(
+tf('TK12',[
+["Object-Oriented Programming organizes code around objects instead of separate variables and functions.",1],
+["Object is a part of the program that keeps related information together",1],
+["OOP is a series of steps by steps and instructions",0,"هذا وصف للبرمجة الإجرائية (Procedural)، أما OOP فينظّم الكود حول الكائنات."],
+["A Class is an instance of an object",0,"العكس هو الصحيح: الكائن (Object) هو نسخة (instance) من الكلاس."],
+["Methods represent what can object do",1],
+["Attribute represents what can object has",1],
+["A class attribute is normally shared by all instances of the class.",1],
+["Class name always start with small letter",0,"اسم الكلاس يبدأ عادةً بحرف كبير مثل Student."],
+["In OOP Programming data is stored in Separate Variables",0,"في OOP تُخزَّن البيانات داخل الكائنات، أما المتغيرات المنفصلة فهي أسلوب البرمجة الإجرائية."],
+["In Python, the constructor method is always named __init__().",1],
+["The __init__() method must be called manually every time an object is created.",0,"تعمل __init__() تلقائيًا عند إنشاء الكائن."],
+["The self keyword refers to the class itself, not to the specific object using it.",0,"self يشير إلى الكائن المحدد الذي يستخدم الكلاس."],
+["In Python an instance attribute is usually created using self inside a method.",1],
+["Encapsulation means that important data is kept inside the object and accessed through safe methods.",1],
+["Encapsulation and validation mean exactly the same thing.",0,"التغليف يحمي البيانات ويتحكم في الوصول إليها، أما التحقق (validation) فهو قاعدة تُطبَّق داخل الدوال للتأكد من صحة القيمة."],
+["A setter can check a value before storing it in an object.",1],
+["Abstraction allows the same method to behave differently",0,"هذا هو تعدد الأشكال (Polymorphism)، أما التجريد فيخفي التفاصيل غير الضرورية."],
+["Using a double underscore (__) before an attribute name in Python makes it truly impossible to access from outside the class.",0,"بايثون يغيّر اسم الخاصية داخليًا (name mangling) فيصعب الوصول إليها، لكنها ليست مستحيلة تمامًا."],
+["A protected attribute in Python is usually written with one underscore before its name.",1]
+]),
+tf('TK13',[
+["Abstraction means hiding unnecessary details and showing only what is needed.",1],
+["An abstract class in Python can be used to create objects directly.",0,"لا يمكن إنشاء كائنات من كلاس مجرد مباشرة، وتظهر رسالة TypeError."],
+["An abstract method defines required behavior for subclasses.",1],
+["A concrete class can be instantiated when all required abstract methods are implemented.",1],
+["A concrete method inside an abstract class already contains complete code.",1],
+["Inheritance allows a child class to reuse the attributes and methods of a parent class.",1],
+["Inheritance is best used when there is an HAS-A relationship.",0,"الوراثة تناسب علاقة IS-A، أما HAS-A فتُمثَّل بالتركيب (Composition)."],
+["In Python, a protected attribute is written with two underscores before its name.",0,"الخاصية المحمية بشرطة سفلية واحدة (_name)، والشرطتان للخاصية الخاصة (private)."],
+["Composition means that a class inherits behavior from another class.",0,"التركيب يعني أن الكلاس يحتوي على كائنات من كلاسات أخرى (HAS-A)، وليس أن يرث منها."],
+["Composition is commonly used to represent a HAS-A relationship.",1],
+["Method overriding happens when a child class provides its own version of a method that already exists in the parent class.",1],
+["Method overriding allows a child class to provide its own implementation of a parent method",1],
+["Polymorphism requires every class to have a different method name.",0,"تعدد الأشكال يعني استخدام اسم الدالة نفسه بسلوك مختلف."],
+["A UML class diagram can show attributes and methods.",1],
+["Real AI applications are usually written as one large program instead of separate classes.",0,"تُصمَّم تطبيقات الذكاء الاصطناعي عادةً كمجموعة كلاسات متخصصة."],
+["An AI pipeline is a series of steps that data flows through, from raw input to final output.",1],
+["A Dataset class provides a central place to store and access data using encapsulation.",1],
+["A Dataset class is normally responsible for training the model itself.",0,"التدريب مسؤولية الـ Model، أما Dataset فيخزّن البيانات ويتيح الوصول إليها."],
+["The predict() method normally makes predictions using a trained model.",1],
+["The train() method is normally used to learn patterns from training data.",1],
+["A Preprocessor usually prepares data before it is given to a model.",1],
+["A large class with many unrelated responsibilities is usually easier to maintain than several focused classes",0,"الكلاسات الصغيرة المركّزة أسهل في الصيانة والاختبار."]
+]),
+tf('TK11',[
+["Accuracy compares the predicted labels with the actual labels.",1],
+["Invalid values should be quietly stored in the object",0,"يجب رفض القيم غير الصحيحة (validation) وعدم تخزينها بصمت."],
+["A DataValidator is responsible for making predictions.",0,"DataValidator يفحص جودة البيانات، والتنبؤ مسؤولية الـ Model."],
+["Mixing input, cleaning, prediction and output in one class makes debugging easier.",0,"خلط المسؤوليات في كلاس واحد يجعل معرفة مكان الخطأ أصعب."],
+["Accuracy and coverage are calculated in the same way in the unit's examples.",0,"الدقة تقارن التوقعات بالإجابات الحقيقية، أما التغطية فتفحص هل الفئة موجودة في الكتالوج."],
+["A Logger gives the system a history of events.",1]
+])
+);
+
+/* ---- 2) Multiple choice ---- */
+var MCQ=[].concat(
+mc('TK12',[
+["What is a class in Object-Oriented Programming?",["A loop used to repeat instructions","A blueprint or template used to create objects","A file that stores only text","A number stored in memory"],1],
+["What is an object in Object-Oriented Programming?",["An instance created from a class","A programming error","A keyword used for loops","A type of comment"],0],
+["What does the self keyword represent inside a Python class?",["The class name","The specific object using the class","A built-in Python function","A default parameter value"],1],
+["Which of the following is an attribute of a Student object?",["study()","show_info()","name","enroll()"],2],
+["Each object has its own copy of :",["Class attribute","Instance attribute","Method","Special method"],1],
+["A Constructor always named ........",["__del__","__con__","__init__","__initialize__"],2],
+["What is encapsulation?",["Hiding all classes from the program","Protecting data and controlling access to it","Repeating the same code many times","Removing all methods from a class"],1],
+["Which symbol is commonly used in Python to make an attribute private?",["++","--","__","##"],2],
+["Which method is used to read private data?",["getter","setter","constructor only","loop"],0],
+["Which method is used to update private data safely?",["print method","setter","import statement","comment"],1]
+]),
+mc('TK13',[
+["What is abstraction?",["Showing every detail to the user","Hiding unnecessary details and showing only what is needed","Removing all methods","Changing all attributes to public"],1],
+["In a face attendance system, which method should be public?",["analyze_features()","compare_with_records()","mark_attendance()","save_internal_data()"],2],
+["Which module is used to create abstract classes in Python?",["math","abc","os","random"],1],
+["What happens when you try to create an object directly from an abstract class in Python?",["The program runs normally","Python raises a TypeError","The class becomes private","The object is created but has no methods"],1],
+["What is inheritance?",["Creating objects without classes","Reusing code from an existing parent class","Deleting all child classes","Writing only one function"],1],
+["What is a child class?",["A class that inherits from another class","A variable inside a loop","A method that prints output","A file name"],0],
+["What is polymorphism?",["Different objects use the same method name but behave differently","All objects must behave exactly the same","A class cannot inherit methods","A program cannot use lists"],0],
+["Which relationship is an example of composition?",["A Dog IS AN Animal","A Car HAS AN Engine","A Cat IS AN Animal","A Truck IS A Vehicle"],1],
+["What is an AI pipeline?",["A group of connected stages used to process data and produce results","A single variable","A type of comment","A method that only prints text"],0],
+["Which class is usually responsible for cleaning data in an AI pipeline?",["Preprocessor","ResultDisplay","Logger only","Student object only"],0],
+["Which class is usually responsible for making predictions?",["Model","Dataset","OutputHandler only","Course"],0],
+["What does composition mean in the context of an AI pipeline?",["One object contains or uses other objects","One class deletes another class","One method has no code","One variable stores all objects as text"],0]
+]),
+mc('TK11',[
+["In the unit's evaluate() method, accuracy is calculated as:",["wrong ÷ total × 100","correct ÷ total × 100","total ÷ correct","correct + wrong"],1],
+["Which class checks the prediction before it is used?",["Logger","Dataset","Evaluator","UserInput"],2],
+["A model gets 3 of 5 test predictions correct. What is its accuracy?",["30%","40%","60%","80%"],2],
+["Which class checks data quality in a data processing pipeline?",["DataLoader","DataValidator","Pipeline","FeatureExtractor"],1],
+["In StudentDataset.load_batch, what happens to Omar's record with score 105?",["It is saved as 100","It is saved unchanged","It is skipped as invalid","The program restarts"],2,CODE_DS],
+["How many records does the dataset contain after load_batch(raw_data) finishes?",["4","5","6","1"],1,CODE_DS],
+["Which line of code performs the data-quality check?",["if not (0 <= score <= 100):","self.__records = []","for item in data_list:","return len(self.__records)"],0,CODE_DS],
+["What is the purpose of return inside the if block of add_student?",["It restarts the program","It saves the score as 100","It stops the method so the invalid record is not added","It deletes the valid records"],2,CODE_DS],
+["If the if block (the validation) were removed from add_student, what would happen?",["Omar's record would still be skipped","The program would stop with an error","Omar's score would be changed to 100","Omar's score of 105 would be stored, so the dataset would hold 6 records including an impossible score"],3,CODE_DS],
+["After running the program, a student notices that the dataset has 5 records, but raw_data has 6. What is the best first step to find the reason (error analysis)?",["Read the message printed by add_student, which names the record that was rejected","Delete the dataset and start again","Change all scores to 100","Ignore it, because the numbers do not matter"],0,CODE_DS],
+["Another invalid record {\"name\": \"Ali\", \"score\": -3, \"subject\": \"Python\"} is added to raw_data (7 records in total). How many valid records will be loaded?",["7","6","5","4"],2,CODE_DS],
+["Why is checking each record before storing it useful for the reliability of an AI system?",["Bad data is stopped before it can affect the model's results","It makes the code shorter","It makes the model train faster","It removes the need for a model"],0],
+["Which statement is true about the dataset after load_batch(raw_data)?",["It contains Omar's record with a corrected score","It contains all 6 records","It contains no records, because one record was invalid","All the stored scores are between 0 and 100"],3,CODE_DS],
+["Why is debugging hard when everything is in one big class?",["Python forbids it","It is unclear where the problem happened","The code is always shorter","Objects cannot be created"],1]
+])
+);
+
+/* ---- 3) Compare ---- */
+var CMP=[].concat(
+wr('TK12',[
+["Compare procedural programming and object-oriented programming.","Procedural programming uses a series of step-by-step instructions with data stored in separate variables, works for simple tasks, and gets messy with large programs. Object-oriented programming organizes code into objects with data stored inside them, allows entire objects (data + behavior) to be reused, models real-world entities naturally, and scales well for big, complex systems."],
+["Compare class attributes and instance attributes.","Class attributes are shared by all objects of the class, while instance attributes are unique to each object and are set using self."],
+["Compare a class and an object.","A class is a blueprint or template that defines attributes and methods, while an object is an instance created from that class, holding its own data."],
+["Compare attributes and methods.","Attributes are the data an object has (what the object has), while methods are the functions that represent what the object can do."],
+["Compare public, protected, and private access modifiers.","Public (self.name) is accessible everywhere, inside and outside the class. Protected (self._name) is meant for use inside the class and its subclasses. Private (self.__name) is accessible only inside the class itself."],
+["Compare a getter and a setter method.","A getter reads protected data (e.g., get_age()), while a setter updates protected data safely with validation (e.g., set_age())."],
+["Compare unsafe design and safe design in encapsulation.","In an unsafe design, data is open and any part of the program can change it directly, so wrong values can be stored. In a safe design, a method checks the new value before saving it, so invalid values are rejected and valid data is kept safe."],
+["Compare encapsulation and validation in protecting data.","Encapsulation protects data by keeping it private and controlling access through safe methods, while validation is the rule applied inside those methods (such as setters) to check that only correct values are accepted before storing them."]
+]),
+wr('TK13',[
+["Compare abstraction and encapsulation.","Encapsulation protects data using private attributes and safe methods (how data is protected). Abstraction hides unnecessary details and shows only simple methods to the user (what is shown to the user)."],
+["Compare an abstract method and a concrete method.","An abstract method has no implementation and must be completed by the sub-class, while a concrete method already has complete code and can be used directly by the sub-class."],
+["Compare a weak design and a clean design in terms of abstraction.","In a weak design, the outside code performs many internal steps directly, so it must change whenever the internal logic changes. In a clean design, internal steps are hidden inside a class, and the outside code only calls one simple method (e.g., predict())."],
+["Compare an abstract class and a concrete (complete) class.","An abstract class is incomplete and cannot be used to create objects directly, since it may contain unimplemented abstract methods or properties. A concrete class completes all required abstract methods/properties, so objects can be created from it."],
+[`Compare inheritance and composition.`,`Inheritance models an "IS A" relationship, where a child class reuses and extends a parent class's features (e.g., class Dog(Animal)). Composition models a "HAS A" relationship, where a class contains instances of other classes as attributes (e.g., self.engine = Engine()).`],
+["Compare association, aggregation, and composition relationships in UML.",`Association means one class uses or communicates with another, with neither owning the other (Student - Course). Aggregation is a weak "has-a" relationship where contained objects can exist independently (Department - Professor). Composition is a strong "has-a" relationship where the contained object cannot exist without its owner (House - Room).`],
+["Compare a parent class and a child class.","A parent (super) class contains the shared/common features, while a child (sub) class inherits those features from the parent and can also add its own special features."],
+["Compare method overriding and polymorphism.","Method overriding is when a child class provides its own version of a method that already exists in the parent class. Polymorphism is the broader result of this: different objects (often via overriding) can use the same method name but behave differently."],
+["Compare the train() and predict() methods of a model class.","train(data) learns patterns from the training data, while predict(input) uses what the model already learned to make a prediction on new input."],
+["Compare a Preprocessor class and an Evaluator class in an AI pipeline.","A Preprocessor class prepares/cleans the data before prediction (e.g., fixes errors, removes blanks, normalizes values), while an Evaluator class checks or measures how accurate the model's predictions are."]
+]),
+wr('TK11',[
+["Compare one large class with several small cooperating classes: which is easier to test, debug and extend, and why?","Several small classes are easier to test, debug and extend, because each has one responsibility and problems can be located and fixed in one place."]
+])
+);
+
+/* ---- 4) Code ---- */
+var CODE=[
+{k:'TK12',q:"Write a Python Book class with a constructor that receives title and author. Create two Book objects and print their titles.",
+ac:`class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+
+book1 = Book("Python Basics", "Ali")
+book2 = Book("AI Basics", "Sara")
+print(book1.title)
+print(book2.title)`},
+{k:'TK12',q:`Student class
+(a) Write the class Student with a constructor that sets name, grade and attendance (attendance is False by default).
+(b) Add the method show_info() that prints the student's details.
+(c) Add the method mark_present() that sets attendance to True.
+(d) Create one Student object ("Amina", "A") and call both methods so the output shows that she is present.`,
+ac:`class Student:
+    def __init__(self, name, grade, attendance=False):
+        self.name = name
+        self.grade = grade
+        self.attendance = attendance
+
+    def show_info(self):
+        print(self.name, self.grade, self.attendance)
+
+    def mark_present(self):
+        self.attendance = True
+
+s1 = Student("Amina", "A")
+s1.mark_present()
+s1.show_info()`,a:"Output:\nAmina A True"},
+{k:'TK12',q:`AI_Assistant class
+(a) Write the class AI_Assistant with a constructor that stores three attributes: name, language and volume_level.
+(b) Add the method respond() that prints the assistant's name and language, and the method change_language(new_language) that changes the assistant's language.
+(c) Create two different objects: "Nova" (English, volume 5) and "Echo" (Arabic, volume 3).
+(d) Call respond() on a1, change the language of a2 to French, then call respond() on a2. Write the output.`,
+ac:`class AI_Assistant:
+    def __init__(self, name, language, volume_level):
+        self.name = name
+        self.language = language
+        self.volume_level = volume_level
+
+    def respond(self):
+        print(self.name, "says hello in", self.language)
+
+    def change_language(self, new_language):
+        self.language = new_language
+
+a1 = AI_Assistant("Nova", "English", 5)
+a2 = AI_Assistant("Echo", "Arabic", 3)
+
+a1.respond()
+a2.change_language("French")
+a2.respond()`,a:"Output:\nNova says hello in English\nEcho says hello in French"},
+{k:'TK13',q:`Refactor the following design into an abstraction-based class.
+(a) Create a class called AttendanceSystem with hidden internal steps as private methods: __capture_face(), __analyze_features(), __compare_with_records(), and __save_attendance().
+(b) Add the one public method mark_attendance() that runs the four steps in order.
+(c) Create the object and call the only method the user needs. Write the output.`,
+ac:`class AttendanceSystem:
+    def __capture_face(self):
+        print("Capturing face...")
+
+    def __analyze_features(self):
+        print("Analyzing features...")
+
+    def __compare_with_records(self):
+        print("Comparing with records...")
+
+    def __save_attendance(self):
+        print("Attendance saved.")
+
+    def mark_attendance(self):
+        self.__capture_face()
+        self.__analyze_features()
+        self.__compare_with_records()
+        self.__save_attendance()
+
+system = AttendanceSystem()
+system.mark_attendance()`,a:"Output:\nCapturing face...\nAnalyzing features...\nComparing with records...\nAttendance saved."},
+{k:'TK13',q:`Notification (inheritance and polymorphism)
+(a) Write the parent class Notification with a message and a send() method.
+(b) Write the three child classes, each overriding send(): EmailNotification, SMSNotification, PushNotification.
+(c) Create a list holding one object of each type (message "Hi").
+(d) Use a loop to call send() on every object. Write the output.
+(e) Explain in one sentence why one loop works for all three objects.`,
+ac:`class Notification:
+    def __init__(self, message):
+        self.message = message
+
+    def send(self):
+        print("Sending:", self.message)
+
+class EmailNotification(Notification):
+    def send(self):
+        print("Email:", self.message)
+
+class SMSNotification(Notification):
+    def send(self):
+        print("SMS:", self.message)
+
+class PushNotification(Notification):
+    def send(self):
+        print("Push:", self.message)
+
+notifications = [EmailNotification("Hi"), SMSNotification("Hi"), PushNotification("Hi")]
+
+for n in notifications:
+    n.send()`,a:"Output:\nEmail: Hi\nSMS: Hi\nPush: Hi\n\nWhy one loop works: each object has its own version of send(), so the same call n.send() gives a different result depending on the object type (polymorphism)."},
+{k:'TK10',q:"Fill in the blanks so it removes extra spaces and makes the text lowercase.",
+code:`class Preprocessor:
+    def clean_text(self, text):
+        return text.____().____()`,ac:"text.strip().lower()"},
+{k:'TK10',q:"Write a class PredictionResult with a label and a private confidence.\nThe constructor must store both, and update_confidence(new_confidence) must reject values outside 0–100 with a printed message.",
+ac:`class PredictionResult:
+    def __init__(self, label, confidence):
+        self.label = label                # public label
+        self.__confidence = confidence    # private confidence
+
+    def update_confidence(self, new_confidence):
+        if 0 <= new_confidence <= 100:
+            self.__confidence = new_confidence
+        else:
+            print(f"Invalid value: {new_confidence}. Confidence has not changed.")
+
+    def show_result(self):
+        print(f"{self.label} - {self.__confidence}%")
+
+result = PredictionResult("Course Question", 86)
+result.update_confidence(-20)   # rejected
+result.show_result()`,a:"Output:\nInvalid value: -20. Confidence has not changed.\nCourse Question - 86%"},
+{k:'TK10',q:"SimplePredictionModel (a): Name the two private attributes in the class. Why is model_name not private?",code:CODE_SPM,
+a:"The private attributes are __pass_threshold and __is_trained.\nmodel_name is public because it is only a name that other parts of the program may read; it is not data that must be protected."},
+{k:'TK10',q:"SimplePredictionModel (b): Write the method predict(self, score). It must return \"PASS\" when the score is greater than or equal to the private threshold, otherwise \"FAIL\". It must refuse to predict if the model is not trained.",code:CODE_SPM,
+ac:`def predict(self, score):
+    if not self.__is_trained:
+        return "Model not trained yet. Call train() first."
+    if score >= self.__pass_threshold:
+        return "PASS"
+    else:
+        return "FAIL"`},
+{k:'TK10',q:"SimplePredictionModel (c): Using the predict() method from part (b), write the exact output.",
+code:`model = SimplePredictionModel("PassFailPredictor", pass_threshold=60)
+print(model.predict(75))
+model.train([72, 55, 88, 45, 91])
+print(model.predict(75))
+print(model.predict(48))
+print(model.predict(60))`,
+a:"Model not trained yet. Call train() first.\n[PassFailPredictor] Training complete.\nTrained on 5 samples.\nPASS\nFAIL\nPASS"},
+{k:'TK10',q:"SimplePredictionModel (d): Why should the model refuse to predict before train() is called?",
+a:"A model that has not been trained has not prepared anything yet, so its prediction would not be reliable. The model checks __is_trained first and returns a clear message, so the user knows what to do (call train() first) instead of receiving a misleading result."},
+{k:'TK10',q:"SimplePredictionModel (e): The line print(model.__pass_threshold) is added at the end of the program. Explain what happens and why, and how the threshold is used by the model without being accessed from outside.",
+a:"An AttributeError is raised. Because the attribute is private, Python changes its name inside the class, so it cannot be accessed directly from outside. The threshold is still used internally, because predict() is inside the class and can read self.__pass_threshold. Outside code only calls predict(score); this is encapsulation: the data is protected and the object controls how it is used."},
+{k:'TK10',q:"PredictionResult (a): What are the label and the confidence in PredictionResult(\"Course Question\", 86)?",code:CODE_PR,
+a:"The label is the prediction the AI gives (\"Course Question\"). The confidence is a value between 0 and 100 that shows how sure the AI is about that prediction (86)."},
+{k:'TK10',q:"PredictionResult (b): Write the exact output of the program above.",code:CODE_PR,
+a:"Course Question: - 86%\nCourse Question: - -20%",note:"ملاحظة: الـ label في الكود هو \"Course Question:\" بالنقطتين، لذلك تظهر الشرطة (-) بعده في الناتج. الفكرة الأساسية أن القيمة -20 أصبحت مخزّنة داخل الكائن."},
+{k:'TK10',q:"PredictionResult (c): Explain why the second output is a problem.",code:CODE_PR,
+a:"A confidence value cannot be negative. The attribute is public, so any part of the program can change it directly, and the wrong value -20 was stored inside the object. This is the unsafe design: the data is open."},
+{k:'TK10',q:"PredictionResult (d): The class is improved by adding the method below. The program now uses result.update_confidence(-20) instead of result.confidence = -20. Write the exact output.",
+code:`def update_confidence(self, new_confidence):
+    if 0 <= new_confidence <= 100:
+        self.confidence = new_confidence
+    else:
+        print(f"Invalid value: {new_confidence}. Confidence has not changed.")`,
+a:"Course Question: - 86%\nInvalid value: -20. Confidence has not changed.\nCourse Question: - 86%\n\nThe method checks the new value (0 <= new_confidence <= 100) before saving it. The invalid value -20 is rejected and the old valid value 86 is kept safe. The object controls how its data is changed."},
+{k:'TK10',q:"PredictionResult (e): Why should the label and the confidence stay together in one object?",
+a:"A prediction has two parts. The label says what the AI predicted, and the confidence says how sure it is. Each part is not much use on its own:\n• A label alone doesn't show how reliable it is.\n• A confidence alone doesn't say what was predicted."},
+{k:'TK10',q:"(Find the bug) Identify the two mistakes and rewrite the code correctly.",
+code:`class Preprocessor:
+    def clean(data):
+        return [d.strip() for d in data]
+
+class AIPipeline:
+    def __init__(self):
+        self.preprocessor = Preprocessor`,
+a:"1) clean(data) is missing self.\n2) self.preprocessor = Preprocessor stores the class, not an object (it should be Preprocessor()).",
+ac:`class Preprocessor:
+    def clean(self, data):
+        return [d.strip() for d in data]
+
+class AIPipeline:
+    def __init__(self):
+        self.preprocessor = Preprocessor()`},
+{k:'TK10',q:"Write an OutputHandler class with display(label, confidence) that prints Prediction: … and Confidence: ….",
+ac:`class OutputHandler:
+    def display(self, label, confidence):
+        print(f"Prediction: {label}")
+        print(f"Confidence: {confidence}")
+
+handler = OutputHandler()
+handler.display("Course Question", 0.92)`},
+{k:'TK10',q:"Complete the abstract class so every AI model must have predict().",
+code:`from abc import ABC, abstractmethod
+
+class AIModel(ABC):
+    @______
+    def ______(self, input_data):
+        pass`,
+a:"@abstractmethod and predict.",
+ac:`from abc import ABC, abstractmethod
+
+class AIModel(ABC):
+    @abstractmethod
+    def predict(self, input_data):
+        pass`},
+{k:'TK11',q:"Complete the code.",
+code:`correct = 0
+for score, actual in zip(test_scores, test_labels):
+    prediction = "PASS" if score >= self.__pass_threshold else "FAIL"
+    if prediction ______ actual:
+        correct += 1
+accuracy = (______ / len(test_scores)) * 100`,
+a:"The two blanks are  ==  and  correct."},
+{k:'TK11',q:"Evaluation (a): What does each evaluate() method compare?",code:CODE_EVAL,
+a:"Model 1 compares each predicted label (PASS/FAIL made by the model) with the actual label.\nModel 2 checks whether each requested category exists in the catalogue."},
+{k:'TK11',q:"Evaluation (b): Calculate the accuracy for Model 1 and the coverage for Model 2.",code:CODE_EVAL,
+a:"Model 1: the predictions are PASS, FAIL, PASS, FAIL, PASS, which match all 5 actual labels. Accuracy = 5/5 × 100 = 100%.\n\nModel 2: Action, Drama and Sci-Fi are found (3 hits); Horror and Documentary are not found. Coverage = 3/5 × 100 = 60%."},
+{k:'TK11',q:"Evaluation (c): A student says: \"Coverage of 60% means 60% of the recommendations were correct.\" Is the student right? Explain.",
+a:"The student is wrong. Coverage only checks whether the requested category exists in the catalogue (3 of the 5 requested categories were found). It does not check whether the recommendations are correct. Accuracy is the measure that compares predictions with actual answers."},
+{k:'TK11',q:"Complete the code, and complete the line that prints each evaluation result in the form Score: 70 | Predicted: PASS | Actual: PASS.",
+code:`if not self.__is_trained:
+    print("______")
+    return`,
+a:"The message is: \"Train the model first!\"",
+ac:`print(f"Score: {score:>3} | Predicted: {prediction} | Actual: {actual}")`}
+];
+
+/* ---- 5) Essay / definitions ---- */
+var ESS=[].concat(
+wr('TK12',[
+["Define Object-Oriented Programming (OOP).","OOP is a programming paradigm based on the concept of objects. It is a way of writing programs by organizing the code around objects"],
+["What is a programming paradigm?","A programming paradigm is a style or approach used to organize and write programs."],
+["List three reasons why Object-Oriented Programming is useful.","Any three of: easier teamwork, easier maintenance, better code organization, code reusability, data protection, easier extension for large systems."],
+["List the six main concepts of Object-Oriented Programming.","Class, Object, Encapsulation, Abstraction, Polymorphism, Inheritance."],
+["Define a constructor and explain when it runs.","A constructor is a special method that automatically runs when an object is created, the constructor is always named __init__."],
+["Why is a constructor useful in a class?","Without a constructor, many setup methods must be called manually"],
+["Define a destructor and explain when it runs.","A destructor is the opposite of a constructor. It runs automatically when an object is destroyed or when the program finishes. In Python, the destructor is the __del__ method."],
+["What is a class in Object-Oriented Programming?","• A class is an entity that determines how an object will behave and what the object will contain.\n• It is a set of instructions to build a specific type of object, defining a set of attributes and methods that created objects (instances) can have."],
+["Explain the relationship between a class and an object.","An object is an instance of a class. A class is a collection of objects and a template or blueprint from which objects are created."],
+["What is an object? Describe its three characteristics.","An object is an entity that has data (attributes) and functions (methods). Its three characteristics are: Data (Attributes), representing the value of the object; Functions (Methods), representing the functionality of the object; and Identity, a unique ID used internally to identify each object, not visible to the external user."],
+["Explain the purpose of the self keyword in a Python class.","self is a fundamental concept in OOP. It represents the specific object that is using the class, and it refers to the current object instance"],
+["Define attributes and describe the two ways they can be defined in a class.","Attributes are the data that each object holds. They can be defined as Class Attributes, shared by all objects, or Instance Attributes, unique to each object and set using self."],
+["Define methods and explain what they represent inside a class.","Methods are functions that live inside a class. They define what objects can do; they represent the functionality/behaviors of an object."],
+["Define encapsulation in Object-Oriented Programming.","Encapsulation means that the internal data of an object is protected and should not be changed from outside the object."],
+["Explain why encapsulation is important in OOP.","Encapsulation is important because data is protected from accidental or intentional misuse, complexity is hidden from the user of the class, maintenance becomes easier, validation can be added before changing values, and sensitive data can be protected."],
+["Which concepts of OOP that used to protect sensitive data from changing outside the object","Encapsulation"],
+["List the three types of access modifiers in Python and their accessibility.","Public (self.name) - accessible everywhere, inside and outside the class; Protected (self._name) - by convention, accessible inside the class and subclasses; Private (self.__name) - accessible only inside the class itself."],
+["What is a getter method? Give its purpose.","A getter is a method that reads protected/private data, for example get_age()."],
+["What is a setter method? Give its purpose.","A setter is a method that updates protected/private data safely, with validation, for example set_age()."],
+["Give reasons why validation is important when setting a value.","Validation prevents invalid data from being stored, for example rejecting a negative confidence value or a score outside 0-100, keeping the object's data safe and correct."],
+["Explain how a setter method can protect an AI confidence value between 0 and 100.","A setter method such as update_confidence() checks the new confidence value before saving it. If the value is invalid (e.g., -20), it is rejected and the old valid value (e.g., 86) is kept safe."],
+["Describe what happens when you try to access a private attribute directly from outside a class in Python.","Python raises an error, because using double underscore (__) protects the data - this is encapsulation protecting the data."],
+["Explain why sensitive data such as medical history, salary, or grades should be protected in intelligent systems.","Sensitive data should not be changed directly by any part of the program; not every part of the program should be allowed to change this data directly, so it must be protected and only changed through safe, validated methods."]
+]),
+wr('TK13',[
+["Define abstraction in Object-Oriented Programming.","Abstraction is the process of hiding implementation details and only exposing what the user needs to know. The user of a class should see only the important methods, while unnecessary internal details stay hidden inside the class."],
+["Explain the difference between abstraction and encapsulation.","Encapsulation focuses on how data can be protected, using private data and safe methods. Abstraction focuses on what should be shown to the user, showing simple methods and hiding details."],
+["Mention the three types of inheritance","Single – Multi-level - Multiple"],
+["Define an abstract class and describe its purpose.","An abstract class is a class that cannot be used to create objects directly. It defines methods that child classes must have, leaving the actual implementation to the child classes, like a job description that states what must be done without saying how."],
+["Define an abstract method.","An abstract method is a method written inside an abstract class that does not contain the real implementation; it only defines what every sub-class must do, and the actual code must be written inside the sub-classes."],
+["Define a concrete method and explain how it differs from an abstract method.","A concrete method is a normal method that has complete code inside the abstract class and can be used directly by a sub-class without rewriting it, unlike an abstract method, which is a required method without implementation that the sub-class must complete."],
+["Define an abstract property and explain its purpose.","An abstract property is like an abstract method but used for a value or property; it forces sub-classes to provide a specific property. In Python, abstract properties are created using @property and @abstractmethod."],
+["Explain why an abstract class cannot be used to create objects directly.","An abstract class is incomplete; it may contain abstract methods or abstract properties that do not have real implementation yet. Attempting to instantiate an abstract class results in a TypeError."],
+["Discuss why poor abstraction can make a system hard to update and debug.","With poor abstraction, changing one class may force many other classes to change (hard to update), it becomes unclear which class caused the problem (hard to debug)"],
+["Explain the role of the @abstractmethod decorator in Python.","The @abstractmethod decorator, used together with the abc module, marks a method inside an abstract class as required, meaning every sub-class must implement it; it allows developers to enforce method implementation in subclasses while hiding complex internal logic."],
+["Describe how the abc module is used to create abstract classes.","Abstract classes are created using the abc module together with the @abstractmethod decorator, which lets developers enforce method implementation in subclasses."],
+["Why is abstraction important when the internal AI model of a system may change later?","Because internal details can change later without breaking other classes"],
+["Define inheritance in Object-Oriented Programming.","Inheritance is a mechanism that allows a new class (the child or subclass) to take on all the attributes and methods of an existing class (the parent or superclass), promoting code reuse, logical hierarchy, and easy extension."],
+[`Explain the "IS A" relationship.`,`Inheritance fits an "IS A" relationship, meaning the child class is a type of the parent class. Examples: a Dog "IS A" Animal`],
+["Describe the purpose of the super() function in Python.","super() lets the child class call methods from the parent class. It is most importantly used in the child's constructor to run the parent's __init__ first, so the shared data is prepared before the child adds its own attributes."],
+["Explain what a protected access modifier means in Python.","A protected attribute is written with one underscore before its name (e.g., _fuel_level). It is not fully private; it signals that the attribute is mainly for internal class use but can also be used by child classes, and should not be changed directly from outside the class."],
+["List the three types of inheritance mentioned in the unit and give an example of each.","Single inheritance - one child inherits from one parent (class Dog(Animal)); Multi-level inheritance - a chain from grandparent to parent to child (class Puppy(Dog)); Multiple inheritance - one child inherits from multiple parents (class FlyingCar(Car, Plane))."],
+["Define method overriding and give an example.","Method overriding happens when a child class provides its own version of a method that already exists in the parent class, replacing the parent's version for that class. Example: BaseModel has predict(), and TextModel, ImageModel, and VoiceModel each provide their own version of predict()."],
+["Explain when inheritance should NOT be used.","If the class isn't a type of another class, inheritance is probably the wrong choice."],
+["Define composition in Object-Oriented Programming.",`Composition means creating a class that stores instances of other classes as its attributes; instead of inheriting behavior, the class delegates work to the objects it contains (a "HAS-A" relationship).`],
+["Explain why composition is important in AI systems.","AI systems are rarely one single huge class; they are pipelines of specialized components that each do one job well and hand results to the next stage (e.g., DataLoader to Preprocessor to Model to Evaluator)."],
+[`Discuss the difference between "IS A" and "HAS A" relationships, giving one example of each.`,`An "IS A" relationship uses inheritance, e.g., a Dog IS AN Animal. A "HAS A" relationship uses composition, e.g., a Car HAS AN Engine (self.engine = Engine()).`],
+["Define polymorphism",`In OOP it means "one interface, many behaviors" - different objects can use the same method name in different ways.`],
+["Explain how polymorphism allows different objects to use the same method name in different ways.","Code can call the same method (such as move() or robot.greet()) on objects of different classes, and each object behaves differently internally even though the method call is the same"],
+["Define a UML class diagram and explain its purpose.","A class diagram is a graphical representation of the classes inside an object-oriented system, used to plan and design software before writing code; it shows a system's classes, attributes, methods, and relationships, helping the team understand how the system is organized."],
+["List the three sections of a class in a UML class diagram.","Class Name, Attributes (Data), and Methods (Behaviors)."],
+["Explain the difference between aggregation and composition relationships in UML.",`Aggregation represents a weak "has-a" relationship where the contained objects can continue to exist independently (e.g., a Department and its Professors). Composition represents a strong "has-a" relationship where the contained object cannot exist without its owner (e.g., a House and its Rooms).`],
+["Describe the inheritance relationship in UML.",`Inheritance in UML represents an "is-a" relationship. Example: Car IS A Vehicle, Truck IS A Vehicle.`],
+["Explain how OOP is used in real AI applications.","AI applications are usually built using classes and objects, with each part of the system given a specific responsibility using the same principles studied throughout the unit - classes, objects, encapsulation, abstraction, inheritance, polymorphism, and composition - making the system easier to understand, test, and extend."],
+["What's the function of class DataLoader in AI pipeline","Reads raw data from a list, file, or input"],
+["What's the function of class Preprocessor in AI pipeline","Cleans the data: fixes errors, removes blanks, normalizes values"],
+["What's the function of class Display in AI pipeline","Shows predictions and performance to the user"],
+["List the three essential methods used to represent a model as a class.","train(data), predict(input), and evaluate(test_data)."],
+["Explain the purpose of the train() method in a model class.","The train(data) method learns patterns from the training data."],
+["Explain the purpose of the predict() method in a model class.","The predict(input) method uses what the model learned to make a prediction."],
+["Explain the purpose of the evaluate() method in a model class.","The evaluate(test_data) method measures how accurate the model is."],
+["What is the difference between train() and predict()?","train() learns from training data. predict() uses the trained model to produce predictions."],
+["Explain why AI systems are usually designed as cooperating objects instead of one large object.","Real AI applications are usually not written as one large program; they are designed as collections of specialized classes, each with a clear responsibility, which communicate with each other to form a complete AI system that is easier to understand, test, and extend."],
+["Explain why each stage of an AI pipeline is represented as a separate class.","Representing each stage as a separate class (like a factory assembly line where each station does one job) makes the system easier to organize, test, reuse, and improve, and the whole pipeline is coordinated by a central class such as AIPipeline."]
+]),
+wr('TK10',[
+[`The unit shows a "SmartAssistant" that does everything in one method. Explain why separating it into UserInput, Preprocessor, Model and OutputHandler is a better design.`,"One class doing every job makes it hard to know where an error happened (input, data prep, prediction, check, output). Separate classes each own one responsibility, so the system is easier to read, test and improve."]
+]),
+wr('TK11',[
+["A SmartAssistant gives a wrong output. List the three questions you should ask to find where the problem happened.","Was the input unclear?\nWas the data prepared badly?\nDid the model make an unreliable prediction?\nWas the result checked incorrectly?\nWas the output shown in the wrong way?"]
+])
+);
+
+/* ------------------------------------------------------------------ *
+ *  Islands                                                           *
+ * ------------------------------------------------------------------ */
+var ISL=[
+{id:'tf',name:'جزيرة العملات الذهبية',tag:'صح أم خطأ',type:'tf',c:'--c1',ic:'i-coin',sym:['i-coin','i-coin'],size:10,shuffle:true,items:TF,
+ mission:'كل إجابة صحيحة تمنحك عملة ذهبية',label:'العملات الذهبية',
+ msg:{ok:'إجابة صحيحة! جمعت عملة ذهبية.',no:'إجابة خاطئة، لا عملة هذه المرة.',half:''}},
+{id:'mcq',name:'وادي الأبواب',tag:'اختيار من متعدد',type:'mcq',c:'--c2',ic:'i-door',sym:['i-door','i-door-open'],size:9,shuffle:true,items:MCQ,
+ mission:'كل إجابة صحيحة تفتح لك بابًا جديدًا',label:'الأبواب المفتوحة',
+ msg:{ok:'إجابة صحيحة! انفتح الباب.',no:'الباب ما زال مغلقًا.',half:''}},
+{id:'cmp',name:'معبد الألغاز',tag:'قارن',type:'wr',c:'--c3',ic:'i-puzzle',sym:['i-puzzle','i-puzzle'],size:5,items:CMP,
+ mission:'اكتب مقارنتك ثم قارنها بالإجابة النموذجية لتجمع قطع اللغز',label:'قطع اللغز',
+ msg:{ok:'ممتاز! حصلت على قطعة لغز كاملة.',half:'حصلت على نصف قطعة. راجع ما ينقص إجابتك.',no:'لا قطعة هذه المرة. راجع الإجابة النموذجية وجرّب لاحقًا.'}},
+{id:'code',name:'مختبر الكود',tag:'أسئلة برمجية',type:'wr',code:true,c:'--c4',ic:'i-chip',sym:['i-chip','i-chip'],size:5,items:CODE,
+ mission:'اكتب الكود بنفسك ثم راجعه لتشغّل شرائح المختبر',label:'الشرائح المشغّلة',
+ msg:{ok:'الشريحة تعمل!',half:'الشريحة تعمل جزئيًا. قارن كودك بالنموذج.',no:'الشريحة لم تعمل. راجع الإجابة النموذجية.'}},
+{id:'ess',name:'قلعة التنين',tag:'أسئلة مقالية',type:'wr',c:'--c5',ic:'i-castle',sym:['i-bolt','i-bolt'],size:8,items:ESS,
+ mission:'أجب بكلماتك لتُضعف التنين وتصل إلى الكنز',label:'ضربات التنين',
+ msg:{ok:'ضربة قوية! أضعفت التنين.',half:'ضربة خفيفة. التنين ما زال واقفًا.',no:'أخطأت الضربة. راجع الإجابة وحاول مجددًا.'}}
+];
+var TYPE_LABEL={tf:'صح أم خطأ',mcq:'اختيار من متعدد',cmp:'قارن',code:'سؤال برمجي',ess:'سؤال مقالي'};
+
+function chunk(items,size){
+  var n=Math.ceil(items.length/size),base=Math.floor(items.length/n),extra=items.length%n,out=[],p=0;
+  for(var i=0;i<n;i++){var len=base+(i<extra?1:0);out.push(items.slice(p,p+len));p+=len;}
+  return out;
+}
+ISL.forEach(function(x){x.rounds=chunk(x.items,x.size);});
+
+/* ------------------------------------------------------------------ *
+ *  State                                                             *
+ * ------------------------------------------------------------------ */
+var store={p:{},all:false};
+try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);if(o&&o.p)store=o;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+
+function rec(id,r){return (store.p[id]&&store.p[id][r])||null;}
+function passed(id){var o=store.p[id]||{};return Object.keys(o).filter(function(k){return o[k].pct>=0.6;}).length;}
+function need(i){return Math.ceil(ISL[i].rounds.length/2);}
+function islandOpen(i,ignoreAll){return (!ignoreAll&&store.all)||i===0||passed(ISL[i-1].id)>=need(i-1);}
+function roundOpen(i,r){return store.all||r===0||((rec(ISL[i].id,r-1)||{pct:0}).pct>=0.6);}
+function starsOf(id){var o=store.p[id]||{};return Object.keys(o).reduce(function(a,k){return a+o[k].stars;},0);}
+function treasureOpen(){return passed('ess')>=need(4);}
+function rw(n){return n===1?'جولة واحدة':n===2?'جولتين':n<=10?n+' جولات':n+' جولة';}
+function fmt(x){return Number.isInteger(x)?String(x):x.toFixed(1);}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function ic(id,cls){return '<svg class="'+(cls||'ico')+'" viewBox="0 0 32 32" aria-hidden="true"><use href="#'+id+'"/></svg>';}
+function starsHTML(n,cls){var s='';for(var i=0;i<3;i++)s+='<svg viewBox="0 0 32 32" class="'+(i<n?'on':'')+'" aria-hidden="true"><use href="#i-star"/></svg>';return '<span class="'+cls+'" role="img" aria-label="'+n+' من 3 نجوم">'+s+'</span>';}
+
+var $app=document.getElementById('app');
+var view={n:'home'};
+var S=null;          /* current play session */
+var resetArmed=false,resetTimer=null;
+
+/* ------------------------------------------------------------------ *
+ *  Views                                                             *
+ * ------------------------------------------------------------------ */
+function isleHTML(isl,i){
+  var open=islandOpen(i),n=isl.rounds.length,ps=passed(isl.id),st=starsOf(isl.id);
+  var body;
+  if(open){
+    body='<span class="isle-prog"><span class="bar"><i style="width:'+Math.round(ps/n*100)+'%"></i></span>'
+      +'<span>الجولات '+ps+'/'+n+'</span>'
+      +'<span class="pill">'+ic('i-star','ico')+st+'/'+(n*3)+'</span></span>';
+  }else{
+    body='<span class="isle-prog">'+ic('i-lock','ico')+'<span>اجتز '+rw(need(i-1))+' في «'+esc(ISL[i-1].name)+'» لفتحها</span></span>';
+  }
+  return '<button class="isle" style="--c:var('+isl.c+')" data-act="island" data-i="'+i+'"'+(open?'':' disabled')+'>'
+    +'<span class="badge">'+ic(open?isl.ic:'i-lock','')+'</span>'
+    +'<span><span class="isle-tag">'+esc(isl.tag)+' · '+isl.items.length+' سؤال</span>'
+    +'<span class="isle-name">'+esc(isl.name)+'</span>'
+    +'<span class="isle-mission">'+esc(isl.mission)+'</span>'+body+'</span></button>';
+}
+function homeHTML(){
+  var totalR=0,doneR=0,st=0;
+  ISL.forEach(function(x){totalR+=x.rounds.length;doneR+=passed(x.id);st+=starsOf(x.id);});
+  var pct=Math.round(doneR/totalR*100);
+  var items=ISL.map(function(x,i){return '<li>'+isleHTML(x,i)+'</li>';}).join('');
+  var to=treasureOpen();
+  var treasure='<li><div class="treasure'+(to?' open':'')+'"><span class="badge">'+ic(to?'i-chest':'i-lock','')+'</span><span><strong>صندوق الكنز الكبير</strong>'
+    +(to?'وصلت إلى الكنز! جمعت '+st+' نجمة من '+(totalR*3)+'.':'يُفتح عند اجتياز '+rw(need(4))+' في «'+esc(ISL[4].name)+'».')+'</span></div></li>';
+  return '<div class="wrap">'
+    +'<header class="hero"><p class="kicker">Knowledge Quest · Unit 7</p>'
+    +'<h1 data-focus tabindex="-1" style="outline:none"><span>كنز المعرفة</span></h1>'
+    +'<p class="sub">الوحدة السابعة: أساسيات البرمجة كائنية التوجه للأنظمة الذكية. اجمع العملات، افتح الأبواب، حلّ الألغاز وواجه التنين للوصول إلى الكنز.</p>'
+    +'<div class="journey"><div class="journey-row"><span>تقدّم الرحلة: <b>'+doneR+'</b> من <b>'+totalR+'</b> جولة</span><span class="pill">'+ic('i-star','')+'<b>'+st+'</b> / '+(totalR*3)+'</span></div>'
+    +'<div class="bar" role="progressbar" aria-valuenow="'+pct+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+pct+'%"></i></div></div></header>'
+    +'<ol class="route">'+items+treasure+'</ol>'
+    +'<footer class="foot"><button class="link" data-act="toggleAll">'+(store.all?'إعادة قفل الجزر':'فتح كل الجزر (للمعلم)')+'</button>'
+    +'<button class="link" data-act="reset">'+(resetArmed?'اضغط مرة أخرى لتأكيد الحذف':'إعادة ضبط التقدم')+'</button></footer></div>';
+}
+function islandHTML(i){
+  var isl=ISL[i],n=isl.rounds.length;
+  var cells=isl.rounds.map(function(r,j){
+    var rc=rec(isl.id,j),open=roundOpen(i,j),done=rc&&rc.pct>=0.6;
+    return '<li><button class="round'+(done?' done':'')+'" data-act="round" data-i="'+i+'" data-r="'+j+'"'+(open?'':' disabled')+'>'
+      +'<span class="round-n">'+(open?(j+1):ic('i-lock','ico'))+'</span>'
+      +'<span class="round-meta">'+r.length+' سؤال'+(rc?' · '+Math.round(rc.pct*100)+'%':'')+'</span>'
+      +starsHTML(rc?rc.stars:0,'stars')+'</button></li>';
+  }).join('');
+  var boss='';
+  if(isl.id==='ess'){
+    var dmg=0;Object.keys(store.p.ess||{}).forEach(function(k){dmg+=store.p.ess[k].pts;});
+    var hp=Math.max(0,100-Math.round(dmg/isl.items.length*100));
+    boss='<div class="boss"><span>قوة التنين: <b>'+hp+'%</b></span><div class="bar boss" role="progressbar" aria-label="قوة التنين" aria-valuenow="'+hp+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+hp+'%"></i></div></div>';
+  }
+  var next=(i<ISL.length-1)?'<p class="unlock-note">اجتز '+rw(need(i))+' (بنتيجة 60% أو أكثر) لفتح «'+esc(ISL[i+1].name)+'».</p>':'<p class="unlock-note">اجتز '+rw(need(i))+' (بنتيجة 60% أو أكثر) لفتح صندوق الكنز الكبير.</p>';
+  return '<div class="wrap" style="--c:var('+isl.c+')">'
+    +'<div class="top"><button class="link" data-act="home">'+ic('i-chev','chev')+'<span>الخريطة</span></button></div>'
+    +'<p class="kicker">'+esc(isl.tag)+' · '+isl.items.length+' Q</p>'
+    +'<h1 class="page-title" data-focus tabindex="-1" style="outline:none">'+esc(isl.name)+'</h1>'
+    +'<p class="lead">'+esc(isl.mission)+'. كل جولة تُجتاز بنتيجة 60% أو أكثر، ويمكنك إعادتها لتحسين نجومك.</p>'
+    +boss+'<ul class="rounds">'+cells+'</ul>'+next+'</div>';
+}
+
+function slotsHTML(){
+  var isl=ISL[S.ii];
+  return S.items.map(function(_,k){
+    var sc=S.scores[k],cls='slot',sym=isl.sym[0];
+    if(sc===undefined){if(k===S.k)cls+=' cur';}
+    else if(sc===1){cls+=' good';sym=isl.sym[1];}
+    else if(sc===0.5){cls+=' half';sym=isl.sym[1];}
+    else cls+=' bad';
+    return '<span class="'+cls+'"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#'+sym+'"/></svg></span>';
+  }).join('');
+}
+function tfHTML(it){
+  var a=S.q.answered;
+  function b(v,label,en,icn){
+    var cls='tf-btn '+(v?'yes':'no');
+    if(a){if(v===it.a)cls+=' is-right';else if(v===S.q.user)cls+=' is-wrong';else cls+=' is-dim';}
+    return '<button class="'+cls+'" data-act="tf" data-v="'+(v?1:0)+'"'+(a?' disabled':'')+'>'+ic(icn,'')+'<span>'+label+'</span><small>'+en+'</small></button>';
+  }
+  return '<div class="tf">'+b(true,'صح','True','i-check')+b(false,'خطأ','False','i-x')+'</div>';
+}
+function mcqHTML(it){
+  var a=S.q.answered,L='ABCD';
+  return '<ul class="opts" dir="ltr">'+it.o.map(function(t,j){
+    var cls='opt';
+    if(a){if(j===it.a)cls+=' is-right';else if(j===S.q.user)cls+=' is-wrong';else cls+=' is-dim';}
+    return '<li><button class="'+cls+'" data-act="mc" data-v="'+j+'"'+(a?' disabled':'')+'><b>'+L[j]+'</b><span>'+esc(t)+'</span></button></li>';
+  }).join('')+'</ul>';
+}
+function wrHTML(it){
+  var isl=ISL[S.ii],cd=!!isl.code;
+  if(!S.q.revealed){
+    return '<label class="lbl" for="ta">'+(cd?'اكتب إجابتك (كود أو نص):':'اكتب إجابتك بأسلوبك:')+'</label>'
+      +'<textarea id="ta" class="ta'+(cd?' code':'')+'" '+(cd?'dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"':'dir="auto"')+' rows="'+(cd?8:4)+'" placeholder="'+(cd?'# اكتب الكود هنا':'اكتب هنا…')+'"></textarea>'
+      +'<div class="row"><button class="btn primary" id="reveal" data-act="reveal" disabled>اعرض الإجابة النموذجية</button>'
+      +'<span class="hint">'+(cd?'زر Tab يضيف 4 مسافات، واضغط Esc ثم Tab للخروج من الصندوق.':'اكتب ما تتذكره أولًا، ثم قارنه بالإجابة.')+'</span></div>';
+  }
+  var mine=cd?'<pre class="code"><code>'+esc(S.q.user)+'</code></pre>':'<div class="mtxt" dir="auto">'+esc(S.q.user)+'</div>';
+  var model=(it.a?'<div class="mtxt">'+esc(it.a)+'</div>':'')+(it.ac?'<pre class="code"><code>'+esc(it.ac)+'</code></pre>':'');
+  var note=it.note?'<p class="note">'+esc(it.note)+'</p>':'';
+  var rate='';
+  if(S.q.score===null){
+    rate='<div class="rate-wrap"><p class="lbl">قارن إجابتك بالنموذج وقيّمها بصدق:</p><div class="rate" role="group" aria-label="تقييم الإجابة">'
+      +'<button class="btn r-full" data-act="rate" data-v="1">إجابتي صحيحة</button>'
+      +'<button class="btn r-half" data-act="rate" data-v="0.5">صحيحة جزئيًا</button>'
+      +'<button class="btn r-none" data-act="rate" data-v="0">لم تكن صحيحة</button></div></div>';
+  }
+  return '<div class="panels"><div class="panel"><h3>إجابتك</h3>'+mine+'</div><div class="panel model"><h3>الإجابة النموذجية</h3>'+model+note+'</div></div>'+rate;
+}
+function fbHTML(it){
+  var sc=S.q.score;if(sc===null)return '';
+  var isl=ISL[S.ii],cls=sc===1?'good':sc===0?'bad':'mid',msg=isl.msg[sc===1?'ok':sc===0?'no':'half'],extra='';
+  if(isl.type==='tf'){
+    if(sc===0)msg+=' العبارة '+(it.a?'صحيحة':'خاطئة')+'.';
+    if(!it.a&&it.why)extra='<p>لماذا؟ '+esc(it.why)+'</p>';
+  }
+  if(isl.type==='mcq'&&sc===0)msg+=' الإجابة الصحيحة هي '+'ABCD'[it.a]+'.';
+  return '<div class="fb '+cls+'" role="status">'+esc(msg)+extra+'</div>';
+}
+function playHTML(){
+  var isl=ISL[S.ii],it=S.items[S.k],n=S.items.length,last=S.k===n-1,done=S.q.score!==null;
+  var body=isl.type==='tf'?tfHTML(it):isl.type==='mcq'?mcqHTML(it):wrHTML(it);
+  var code=it.code?'<details class="codebox" open><summary>الكود</summary><pre class="code"><code>'+esc(it.code)+'</code></pre></details>':'';
+  return '<div class="wrap" style="--c:var('+isl.c+')">'
+    +'<div class="top"><button class="link" data-act="quit">'+ic('i-chev','chev')+'<span>خروج</span></button>'
+    +'<span class="count">'+(S.k+1)+' / '+n+'</span></div>'
+    +'<p class="kicker">'+esc(isl.name)+' · '+(S.r+1)+'</p>'
+    +'<div class="slots" role="img" aria-label="تقدّم الجولة">'+slotsHTML()+'</div>'
+    +'<article class="qcard"><div class="chips"><span class="chip type">'+TYPE_LABEL[isl.id]+'</span><span class="chip mono">'+it.k+'</span></div>'
+    +'<p class="q" id="q" tabindex="-1" data-focus>'+esc(it.q)+'</p>'+code+body+fbHTML(it)
+    +(done?'<div class="actions"><button class="btn primary" data-act="next">'+(last?'إنهاء الجولة':'السؤال التالي')+'</button></div>':'')
+    +'</article></div>';
+}
+function reviewHTML(){
+  var isl=ISL[S.ii],rows=[];
+  S.items.forEach(function(it,k){
+    if(S.scores[k]===1)return;
+    var ans;
+    if(isl.type==='tf')ans='الإجابة الصحيحة: <b>'+(it.a?'صح (True)':'خطأ (False)')+'</b>'+(it.why?' — '+esc(it.why):'');
+    else if(isl.type==='mcq')ans='الإجابة الصحيحة: <b dir="ltr">'+'ABCD'[it.a]+'. '+esc(it.o[it.a])+'</b>';
+    else ans='<span dir="ltr" style="display:block;white-space:pre-wrap;text-align:left">'+esc((it.a||'')+(it.a&&it.ac?'\n\n':'')+(it.ac||''))+'</span>';
+    rows.push('<div class="rv"><p class="q">'+esc(it.q)+'</p><p class="ans">'+ans+'</p></div>');
+  });
+  if(!rows.length)return '';
+  return '<details class="review"><summary>راجع ما فاتك ('+rows.length+')</summary>'+rows.join('')+'</details>';
+}
+function resultHTML(){
+  var R=view.res,isl=ISL[S.ii],n=S.items.length;
+  var title=R.stars===3?'رحلة مثالية!':R.stars===2?'أحسنت، أداء قوي':R.stars===1?'اجتزت الجولة':'اقتربت، أعد المحاولة';
+  var unlock='';
+  R.opened.forEach(function(i){unlock+='<div class="unlock">'+ic('i-star','')+'<span>فتحت جزيرة جديدة: <b>'+esc(ISL[i].name)+'</b></span></div>';});
+  if(R.treasure)unlock+='<div class="unlock">'+ic('i-chest','')+'<span>وصلت إلى <b>صندوق الكنز الكبير</b>! أكملت الرحلة.</span></div>';
+  var acts='';
+  var hasNext=R.passed&&S.r<isl.rounds.length-1&&roundOpen(S.ii,S.r+1);
+  if(hasNext)acts+='<button class="btn primary" data-act="round" data-i="'+S.ii+'" data-r="'+(S.r+1)+'">الجولة التالية</button>';
+  acts+='<button class="btn'+(hasNext?'':' primary')+'" data-act="round" data-i="'+S.ii+'" data-r="'+S.r+'">أعد الجولة</button>';
+  acts+='<button class="btn" data-act="island" data-i="'+S.ii+'">جولات الجزيرة</button><button class="btn" data-act="home">الخريطة</button>';
+  return '<div class="wrap result" style="--c:var('+isl.c+')">'
+    +'<p class="kicker">'+esc(isl.name)+' · '+(S.r+1)+'</p>'
+    +'<h1 class="r-title" data-focus tabindex="-1">'+title+'</h1>'
+    +starsHTML(R.stars,'big-stars')
+    +'<p class="r-sum">'+esc(isl.label)+': '+fmt(R.pts)+' / '+n+'</p>'
+    +'<p class="r-sub">النتيجة '+Math.round(R.pct*100)+'%'+(R.passed?'':' — تحتاج 60% لاجتياز الجولة')+'</p>'
+    +unlock+'<div class="actions">'+acts+'</div>'+reviewHTML()+'</div>';
+}
+
+/* ------------------------------------------------------------------ *
+ *  Flow                                                              *
+ * ------------------------------------------------------------------ */
+function render(){
+  $app.innerHTML=view.n==='home'?homeHTML():view.n==='island'?islandHTML(view.i):view.n==='play'?playHTML():resultHTML();
+  var f=null;
+  if(view.n==='play'&&S&&S.focus){f=$app.querySelector(S.focus);S.focus=null;}
+  if(!f)f=$app.querySelector('[data-focus]');
+  if(f)try{f.focus({preventScroll:true});}catch(e){}
+}
+function go(v){view=v;render();window.scrollTo(0,0);}
+function freshQ(){return {score:null,user:null,answered:false,revealed:false};}
+function startRound(ii,r){
+  var isl=ISL[ii],items=isl.rounds[r].slice();
+  if(isl.shuffle)items=shuffle(items);
+  S={ii:ii,r:r,items:items,k:0,scores:new Array(items.length).fill(undefined),q:freshQ(),focus:null};
+  go({n:'play'});
+}
+function setScore(v,user){
+  S.q.score=v;S.q.user=user;S.scores[S.k]=v;
+  S.focus='[data-act="next"]';
+  render();
+}
+function finish(){
+  var n=S.items.length,pts=S.scores.reduce(function(a,b){return a+(b||0);},0),pct=pts/n;
+  var stars=pct>=0.95?3:pct>=0.8?2:pct>=0.6?1:0,id=ISL[S.ii].id;
+  var before=ISL.map(function(_,i){return islandOpen(i,true);}),tBefore=treasureOpen();
+  if(!store.p[id])store.p[id]={};
+  var old=store.p[id][S.r];
+  if(!old||pct>old.pct)store.p[id][S.r]={pct:pct,stars:stars,pts:pts,max:n};
+  save();
+  var opened=[];ISL.forEach(function(_,i){if(!before[i]&&islandOpen(i,true))opened.push(i);});
+  go({n:'result',res:{pts:pts,pct:pct,stars:stars,passed:pct>=0.6,opened:opened,treasure:!tBefore&&treasureOpen()}});
+}
+
+$app.addEventListener('click',function(e){
+  var b=e.target.closest('[data-act]');if(!b||b.disabled)return;
+  var a=b.dataset.act;
+  if(a==='home'){go({n:'home'});}
+  else if(a==='island'){go({n:'island',i:+b.dataset.i});}
+  else if(a==='round'){startRound(+b.dataset.i,+b.dataset.r);}
+  else if(a==='quit'){go({n:'island',i:S.ii});}
+  else if(a==='tf'){if(S.q.answered)return;var v=b.dataset.v==='1';S.q.answered=true;setScore(v===S.items[S.k].a?1:0,v);}
+  else if(a==='mc'){if(S.q.answered)return;var j=+b.dataset.v;S.q.answered=true;setScore(j===S.items[S.k].a?1:0,j);}
+  else if(a==='reveal'){var ta=document.getElementById('ta');S.q.user=ta.value.trim();S.q.revealed=true;S.focus='.rate .btn';render();}
+  else if(a==='rate'){setScore(+b.dataset.v,S.q.user);}
+  else if(a==='next'){
+    if(S.k>=S.items.length-1){finish();}
+    else{S.k++;S.q=freshQ();render();window.scrollTo(0,0);}
+  }
+  else if(a==='toggleAll'){store.all=!store.all;save();render();}
+  else if(a==='reset'){
+    if(!resetArmed){resetArmed=true;clearTimeout(resetTimer);resetTimer=setTimeout(function(){resetArmed=false;if(view.n==='home')render();},4000);render();}
+    else{resetArmed=false;store={p:{},all:false};save();render();}
+  }
+});
+$app.addEventListener('input',function(e){
+  var t=e.target;if(t.id!=='ta')return;
+  var r=document.getElementById('reveal');if(r)r.disabled=t.value.trim().length<2;
+  t.style.height='auto';t.style.height=Math.min(Math.max(t.scrollHeight+2,t.offsetHeight),460)+'px';
+});
+$app.addEventListener('keydown',function(e){
+  var t=e.target;if(!(t.id==='ta'&&t.classList.contains('code')))return;
+  if(e.key==='Escape'){t.dataset.free='1';return;}
+  if(e.key==='Tab'&&!e.shiftKey&&t.dataset.free!=='1'){
+    e.preventDefault();
+    var s=t.selectionStart,en=t.selectionEnd;
+    t.value=t.value.slice(0,s)+'    '+t.value.slice(en);
+    t.selectionStart=t.selectionEnd=s+4;
+    t.dispatchEvent(new Event('input',{bubbles:true}));
+    return;
+  }
+  if(e.key!=='Tab')t.dataset.free='';
+});
+
+render();
+})();
+</script>
+
+</body></html>
